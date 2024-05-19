@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import dbConnection from "@/lib/dbConnection";
 import User from "@/model/user";
 
+const GET = async (req, context)=>{
+  await dbConnection();
+  try {
+    const id = context.params.id;
+    const user = await User.findOne({_id: id});
+    return NextResponse.json(user);
+  } catch (error) {
+    return NextResponse.json({"error": error});
+  }
+};
+
 const PUT = async (req, context)=>{
   await dbConnection();
   try {
@@ -16,7 +27,6 @@ const PUT = async (req, context)=>{
 
 const PATCH = async (req, context)=>{
     await dbConnection();
-    console.log("delete call hua");
     try {
         const id = context.params.id;
         const body = await req.json();
@@ -38,4 +48,4 @@ const DELETE = async (req, context)=>{
     }
 }
 
-export { PUT, PATCH, DELETE };
+export { GET, PUT, PATCH, DELETE };
