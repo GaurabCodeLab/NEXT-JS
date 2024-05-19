@@ -14,7 +14,7 @@ const getData = async ()=>{
 
 const GET = async ()=>{
     const users = await getData();
-    return NextResponse.json({data : users}, {status : 202, statusText : "laura loge mera"});
+    return NextResponse.json({data : users}, {status : 202, statusText : "success"});
 };
 
 export {GET};
