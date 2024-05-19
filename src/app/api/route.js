@@ -13,9 +13,9 @@ const GET = async (req)=>{
 };
 
 const POST = async (req)=>{
-    const body = await req.json();
+  await dbConnection();  
     try {
-        await dbConnection();
+        const body = await req.json();
         const newUser = await User.create(body);
         return NextResponse.json(newUser, {status : 201, statusText : "new user is created"});
     } catch (error) {
